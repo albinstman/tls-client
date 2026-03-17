@@ -10,9 +10,16 @@ import (
 	"time"
 
 	http "github.com/bogdanfinn/fhttp"
+	quic "github.com/bogdanfinn/quic-go-utls"
 	"github.com/bogdanfinn/tls-client/profiles"
+	tls "github.com/bogdanfinn/utls"
 	"golang.org/x/net/proxy"
 )
+
+// HTTP3DialFunc is a custom dial function for HTTP/3 (QUIC) connections.
+// It receives the target address, TLS config, and QUIC config, and should
+// return an established QUIC connection.
+type HTTP3DialFunc func(ctx context.Context, addr string, tlsCfg *tls.Config, cfg *quic.Config) (*quic.Conn, error)
 
 type HttpClientOption func(config *httpClientConfig)
 
@@ -75,6 +82,7 @@ type httpClientConfig struct {
 	dialer             net.Dialer
 	dialContext        func(ctx context.Context, network, addr string) (net.Conn, error)
 	proxyDialerFactory ProxyDialerFactory
+	http3Dial          HTTP3DialFunc
 
 	proxyUrl                    string
 	serverNameOverwrite         string
@@ -163,6 +171,16 @@ func WithDialer(dialer net.Dialer) HttpClientOption {
 func WithProxyDialerFactory(proxyDialerFactory ProxyDialerFactory) HttpClientOption {
 	return func(config *httpClientConfig) {
 		config.proxyDialerFactory = proxyDialerFactory
+	}
+}
+
+// WithHTTP3Dial configures a custom dial function for HTTP/3 (QUIC) connections.
+// This allows full control over how QUIC connections are established, e.g. for
+// custom UDP routing, tunneling, or connection interception.
+// When nil (the default), the http3.Transport falls back to net.ListenUDP.
+func WithHTTP3Dial(dial HTTP3DialFunc) HttpClientOption {
+	return func(config *httpClientConfig) {
+		config.http3Dial = dial
 	}
 }
 

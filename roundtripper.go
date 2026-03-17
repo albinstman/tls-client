@@ -63,6 +63,7 @@ type roundTripper struct {
 	http3PriorityParam     uint32
 	http3PseudoHeaderOrder []string
 	http3SendGreaseFrames  bool
+	http3Dial              HTTP3DialFunc
 
 	insecureSkipVerify          bool
 	withRandomTlsExtensionOrder bool
@@ -81,6 +82,7 @@ type http3Config struct {
 	http3PriorityParam     uint32
 	http3PseudoHeaderOrder []string
 	http3SendGreaseFrames  bool
+	dial                   HTTP3DialFunc
 }
 
 func (rt *roundTripper) CloseIdleConnections() {
@@ -134,6 +136,7 @@ func buildHTTP3Transport(cfg *http3Config) (http.RoundTripper, error) {
 	t3 := &http3.Transport{
 		TLSClientConfig: utlsConfig,
 		EnableDatagrams: true, // Chrome enables H3_DATAGRAM (setting 0x33)
+		Dial:            cfg.dial,
 	}
 
 	http3Settings := cfg.http3Settings
@@ -412,6 +415,7 @@ func (rt *roundTripper) dialTLS(ctx context.Context, network, addr string) (net.
 			http3PriorityParam:     rt.http3PriorityParam,
 			http3PseudoHeaderOrder: rt.http3PseudoHeaderOrder,
 			http3SendGreaseFrames:  rt.http3SendGreaseFrames,
+			dial:                   rt.http3Dial,
 		})
 		if err != nil {
 			return nil, err
@@ -538,7 +542,7 @@ func (rt *roundTripper) getDialTLSAddr(req *http.Request) string {
 	return net.JoinHostPort(host, "443")
 }
 
-func newRoundTripper(clientProfile profiles.ClientProfile, transportOptions *TransportOptions, serverNameOverwrite string, insecureSkipVerify bool, withRandomTlsExtensionOrder bool, forceHttp1 bool, disableHttp3 bool, enableH3Racing bool, certificatePins map[string][]string, badPinHandlerFunc BadPinHandlerFunc, disableIPV6 bool, disableIPV4 bool, bandwidthTracker bandwidth.BandwidthTracker, dialer ...proxy.ContextDialer) (http.RoundTripper, error) {
+func newRoundTripper(clientProfile profiles.ClientProfile, transportOptions *TransportOptions, serverNameOverwrite string, insecureSkipVerify bool, withRandomTlsExtensionOrder bool, forceHttp1 bool, disableHttp3 bool, enableH3Racing bool, certificatePins map[string][]string, badPinHandlerFunc BadPinHandlerFunc, disableIPV6 bool, disableIPV4 bool, bandwidthTracker bandwidth.BandwidthTracker, http3Dial HTTP3DialFunc, dialer ...proxy.ContextDialer) (http.RoundTripper, error) {
 	pinner, err := NewCertificatePinner(certificatePins)
 	if err != nil {
 		return nil, fmt.Errorf("can not instantiate certificate pinner: %w", err)
@@ -582,6 +586,7 @@ func newRoundTripper(clientProfile profiles.ClientProfile, transportOptions *Tra
 		http3PriorityParam:          clientProfile.GetHttp3PriorityParam(),
 		http3PseudoHeaderOrder:      clientProfile.GetHttp3PseudoHeaderOrder(),
 		http3SendGreaseFrames:       clientProfile.GetHttp3SendGreaseFrames(),
+		http3Dial:                   http3Dial,
 	}
 
 	// Create protocol racer if HTTP/3 racing is enabled
@@ -602,6 +607,7 @@ func newRoundTripper(clientProfile profiles.ClientProfile, transportOptions *Tra
 			clientProfile.GetHttp3PriorityParam(),
 			clientProfile.GetHttp3PseudoHeaderOrder(),
 			clientProfile.GetHttp3SendGreaseFrames(),
+			http3Dial,
 		)
 	}
 

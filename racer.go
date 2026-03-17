@@ -34,6 +34,7 @@ type protocolRacer struct {
 	http3PriorityParam     uint32
 	http3PseudoHeaderOrder []string
 	http3SendGreaseFrames  bool
+	http3Dial              HTTP3DialFunc
 }
 
 func newProtocolRacer(
@@ -52,6 +53,7 @@ func newProtocolRacer(
 	http3PriorityParam uint32,
 	http3PseudoHeaderOrder []string,
 	http3SendGreaseFrames bool,
+	http3Dial HTTP3DialFunc,
 ) *protocolRacer {
 	return &protocolRacer{
 		protocolCache:          make(map[string]string),
@@ -70,6 +72,7 @@ func newProtocolRacer(
 		http3PriorityParam:     http3PriorityParam,
 		http3PseudoHeaderOrder: http3PseudoHeaderOrder,
 		http3SendGreaseFrames:  http3SendGreaseFrames,
+		http3Dial:              http3Dial,
 	}
 }
 
@@ -259,6 +262,7 @@ func (pr *protocolRacer) getHTTP3Config() *http3Config {
 		http3PriorityParam:     pr.http3PriorityParam,
 		http3PseudoHeaderOrder: pr.http3PseudoHeaderOrder,
 		http3SendGreaseFrames:  pr.http3SendGreaseFrames,
+		dial:                   pr.http3Dial,
 	}
 }
 
