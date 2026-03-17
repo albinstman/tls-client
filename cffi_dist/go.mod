@@ -4,7 +4,7 @@ go 1.24.1
 
 require (
 	github.com/bogdanfinn/fhttp v0.6.8
-	github.com/bogdanfinn/tls-client v1.14.0
+	github.com/albinstman/tls-client v1.14.0
 	github.com/google/uuid v1.6.0
 )
 
@@ -24,4 +24,4 @@ require (
 	golang.org/x/text v0.32.0 // indirect
 )
 
-// replace github.com/bogdanfinn/tls-client => ../
+// replace github.com/albinstman/tls-client => ../

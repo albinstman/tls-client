@@ -7,10 +7,10 @@ import (
 	"log"
 	"net"
 
+	tls_client "github.com/albinstman/tls-client"
+	"github.com/albinstman/tls-client/profiles"
 	http "github.com/bogdanfinn/fhttp"
 	quic "github.com/bogdanfinn/quic-go-utls"
-	tls_client "github.com/bogdanfinn/tls-client"
-	"github.com/bogdanfinn/tls-client/profiles"
 	tls "github.com/bogdanfinn/utls"
 )
 
