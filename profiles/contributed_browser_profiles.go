@@ -1,8 +1,8 @@
 package profiles
 
 import (
+	tls "github.com/albinstman/utls"
 	"github.com/bogdanfinn/fhttp/http2"
-	tls "github.com/bogdanfinn/utls"
 	"github.com/bogdanfinn/utls/dicttls"
 )
 

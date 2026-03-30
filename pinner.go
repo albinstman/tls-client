@@ -6,8 +6,8 @@ import (
 	"reflect"
 	"strings"
 
+	tls "github.com/albinstman/utls"
 	http "github.com/bogdanfinn/fhttp"
-	tls "github.com/bogdanfinn/utls"
 	"github.com/tam7t/hpkp"
 )
 

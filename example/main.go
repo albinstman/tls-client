@@ -14,9 +14,9 @@ import (
 	"github.com/albinstman/tls-client/profiles"
 
 	tls_client "github.com/albinstman/tls-client"
+	tls "github.com/albinstman/utls"
 	http "github.com/bogdanfinn/fhttp"
 	"github.com/bogdanfinn/fhttp/http2"
-	tls "github.com/bogdanfinn/utls"
 )
 
 func main() {

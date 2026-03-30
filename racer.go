@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/albinstman/tls-client/bandwidth"
+	tls "github.com/albinstman/utls"
 	http "github.com/bogdanfinn/fhttp"
 	"github.com/bogdanfinn/fhttp/http2"
-	tls "github.com/bogdanfinn/utls"
 )
 
 type protocolRacer struct {

@@ -11,10 +11,10 @@ import (
 
 	"github.com/albinstman/tls-client/bandwidth"
 	"github.com/albinstman/tls-client/profiles"
+	tls "github.com/albinstman/utls"
 	http "github.com/bogdanfinn/fhttp"
 	"github.com/bogdanfinn/fhttp/http2"
 	"github.com/bogdanfinn/quic-go-utls/http3"
-	tls "github.com/bogdanfinn/utls"
 	"golang.org/x/net/proxy"
 )
 

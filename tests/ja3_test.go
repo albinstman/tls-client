@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/albinstman/tls-client/profiles"
-	utls "github.com/bogdanfinn/utls"
+	utls "github.com/albinstman/utls"
 	"github.com/stretchr/testify/assert"
 
 	tls_client "github.com/albinstman/tls-client"

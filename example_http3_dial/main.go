@@ -9,9 +9,9 @@ import (
 
 	tls_client "github.com/albinstman/tls-client"
 	"github.com/albinstman/tls-client/profiles"
+	tls "github.com/albinstman/utls"
 	http "github.com/bogdanfinn/fhttp"
 	quic "github.com/bogdanfinn/quic-go-utls"
-	tls "github.com/bogdanfinn/utls"
 )
 
 func main() {
