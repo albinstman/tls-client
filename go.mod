@@ -2,6 +2,13 @@ module github.com/albinstman/tls-client
 
 go 1.24.1
 
+retract (
+	v1.17.1 // Contains retractions only.
+	v1.17.0 // Stale tag from a previous fork, cached by proxy.golang.org.
+	v1.16.0 // Stale tag from a previous fork, cached by proxy.golang.org.
+	v1.15.0 // Stale tag from a previous fork, cached by proxy.golang.org.
+)
+
 require (
 	github.com/albinstman/fhttp v0.6.8-albinstman.1
 	github.com/albinstman/quic-go-utls v1.0.9-albinstman.1
