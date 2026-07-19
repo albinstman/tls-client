@@ -12,7 +12,7 @@ retract (
 require (
 	github.com/albinstman/fhttp v0.6.8-albinstman.1
 	github.com/albinstman/quic-go-utls v1.0.9-albinstman.1
-	github.com/albinstman/utls v1.7.7-albinstman.1
+	github.com/albinstman/utls v1.7.7-albinstman.2
 	github.com/albinstman/websocket v1.5.5-albinstman.1
 	github.com/bdandy/go-socks4 v1.2.3
 	github.com/google/uuid v1.6.0

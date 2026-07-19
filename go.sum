@@ -2,8 +2,8 @@ github.com/albinstman/fhttp v0.6.8-albinstman.1 h1:4VTeJGZbDKxzOaUfw/x/5fq3aYlH8
 github.com/albinstman/fhttp v0.6.8-albinstman.1/go.mod h1:r083JyXw9XkrZbtLYz0y0cpB0r/BRGeQiJn8fZBCwBo=
 github.com/albinstman/quic-go-utls v1.0.9-albinstman.1 h1:cj2EwH5tnh7cXeoCzI3acbddjvSo9SR9/xqZH2I2aFw=
 github.com/albinstman/quic-go-utls v1.0.9-albinstman.1/go.mod h1:d5Fes+ZXs39ctvv49qjZF+0ILE38TZGNrDMaVHBrXLI=
-github.com/albinstman/utls v1.7.7-albinstman.1 h1:BUv03JwQZofEzhcTe1Z/+bDjNFHi6OzdYA64wiXVP8s=
-github.com/albinstman/utls v1.7.7-albinstman.1/go.mod h1:GCi/5YNwC9TjiIsYsAiSqVDOCAgX8ipsAxsqVuQsZVc=
+github.com/albinstman/utls v1.7.7-albinstman.2 h1:h9LtFYPi4jk4cwZT8EcBr2NrLwsnhuokb+up/AMjw8I=
+github.com/albinstman/utls v1.7.7-albinstman.2/go.mod h1:j6uvrcpLa5gYCbBkM2b046atFamPB4yZCMHrN5Po8jw=
 github.com/albinstman/websocket v1.5.5-albinstman.1 h1:iNa+1NVvh0KvkgpIu8VkVJfuITDgJ5+JdPA5r/tCft0=
 github.com/albinstman/websocket v1.5.5-albinstman.1/go.mod h1:A4Y4T4La0D7rdjN/9OK6qziLekGsCX4S1E5FaCOzDZQ=
 github.com/andybalholm/brotli v1.2.0 h1:ukwgCxwYrmACq68yiUqwIWnGY0cTPox/M94sVwToPjQ=
