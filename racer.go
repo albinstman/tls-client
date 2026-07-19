@@ -7,10 +7,10 @@ import (
 	"sync"
 	"time"
 
-	http "github.com/bogdanfinn/fhttp"
-	"github.com/bogdanfinn/fhttp/http2"
-	"github.com/bogdanfinn/tls-client/bandwidth"
-	tls "github.com/bogdanfinn/utls"
+	http "github.com/albinstman/fhttp"
+	"github.com/albinstman/fhttp/http2"
+	"github.com/albinstman/tls-client/bandwidth"
+	tls "github.com/albinstman/utls"
 )
 
 type protocolRacer struct {

@@ -6,10 +6,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/bogdanfinn/tls-client/profiles"
+	"github.com/albinstman/tls-client/profiles"
 
-	http "github.com/bogdanfinn/fhttp"
-	tls_client "github.com/bogdanfinn/tls-client"
+	http "github.com/albinstman/fhttp"
+	tls_client "github.com/albinstman/tls-client"
 	"github.com/stretchr/testify/assert"
 )
 

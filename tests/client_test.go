@@ -6,11 +6,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/bogdanfinn/tls-client/profiles"
+	"github.com/albinstman/tls-client/profiles"
 
-	http "github.com/bogdanfinn/fhttp"
-	tls_client "github.com/bogdanfinn/tls-client"
-	tls "github.com/bogdanfinn/utls"
+	http "github.com/albinstman/fhttp"
+	tls_client "github.com/albinstman/tls-client"
+	tls "github.com/albinstman/utls"
 )
 
 func TestClients(t *testing.T) {
