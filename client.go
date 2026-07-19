@@ -89,7 +89,11 @@ func ProvideDefaultClient(logger Logger) (HttpClient, error) {
 // NewHttpClient constructs a new HTTP client with the given logger and client options.
 func NewHttpClient(logger Logger, options ...HttpClientOption) (HttpClient, error) {
 	config := &httpClientConfig{
-		followRedirects:    true,
+		followRedirects: true,
+		// verified-egress: HTTP/3 (QUIC) is disabled by default in this fork. The
+		// egress auditor taps TCP only and QUIC secrets are not exported, so a QUIC
+		// connection would be untapped and unverifiable. Opt back in with WithEnableHttp3().
+		disableHttp3:       true,
 		badPinHandler:      nil,
 		customRedirectFunc: nil,
 		defaultHeaders:     make(http.Header),

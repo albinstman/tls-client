@@ -271,10 +271,22 @@ func WithForceHttp1() HttpClientOption {
 	}
 }
 
-// WithDisableHttp3 configures a client to disable HTTP 3 as the used protocol. Will most likely fall back to HTTP 2
+// WithDisableHttp3 configures a client to disable HTTP/3 as the used protocol. Will most likely fall back to HTTP/2.
+// NOTE: HTTP/3 is already DISABLED BY DEFAULT in this fork, so this option is redundant unless HTTP/3 was
+// re-enabled with WithEnableHttp3 earlier in the option list.
 func WithDisableHttp3() HttpClientOption {
 	return func(config *httpClientConfig) {
 		config.disableHttp3 = true
+	}
+}
+
+// WithEnableHttp3 re-enables HTTP/3 (QUIC). HTTP/3 is DISABLED BY DEFAULT in this fork because the
+// verified-egress auditor taps TCP only and does not export QUIC secrets; a QUIC connection would be
+// untapped and unverifiable. Opt back in with this option (required, for example, alongside
+// WithProtocolRacing).
+func WithEnableHttp3() HttpClientOption {
+	return func(config *httpClientConfig) {
+		config.disableHttp3 = false
 	}
 }
 
@@ -282,6 +294,7 @@ func WithDisableHttp3() HttpClientOption {
 // Similar to Chrome's "Happy Eyeballs" approach, this starts both connection types simultaneously
 // and uses whichever connects first.
 // The client will remember which protocol worked for each host and use it directly on subsequent requests.
+// HTTP/3 is disabled by default in this fork, so racing requires WithEnableHttp3.
 // This option is ignored if WithForceHttp1 or WithDisableHttp3 is set.
 func WithProtocolRacing() HttpClientOption {
 	return func(config *httpClientConfig) {
